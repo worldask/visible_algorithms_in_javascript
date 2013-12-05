@@ -1,5 +1,5 @@
 // 排序算法
-var algSort = (function(){
+define (function() {
     // 冒泡排序
     var bubble = function(array) {
         var i, j, swapped, temp;
@@ -29,7 +29,7 @@ var algSort = (function(){
         return;
     };
 
-    // 插入排序
+    // TODO 插入排序
 
 
     // 返回
