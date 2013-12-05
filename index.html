@@ -1,0 +1,20 @@
+<script src="underscore-min.js"></script>
+<script src="util.js"></script>
+<script src="alg.js"></script>
+
+<body>
+    <div class="canvas">
+        <canvas id="canvas" width="1000" height="1000">
+        </canvas>
+    </div>
+</body>
+
+<script>
+    var upper = 100, length = 100;
+    var array = generateRandomList(upper, length);
+
+    alg = new algSort();
+    alg.bubble(array);
+
+    //drawArray(array);
+</script>
