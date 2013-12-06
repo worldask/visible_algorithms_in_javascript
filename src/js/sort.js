@@ -1,8 +1,10 @@
 // 排序算法
 define (function() {
+    // TODO 排序计时
+    
     // 冒泡排序
     var bubble = function(array) {
-        var i, j, swapped, temp;
+        var i, j, swapped, temp, result = [];
 
         // 遍历数组
         for (i = array.length; i > 0; i--) {
@@ -14,7 +16,9 @@ define (function() {
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                     swapped = 1;
-                    //setTimeout(" drawArray(array) ", 500); 
+
+                    // 将发生交换的两个数组索引写入交换记录
+                    result.push([j, j + 1])
                 }
             }
 
@@ -26,14 +30,16 @@ define (function() {
 
         console.log(array);
 
-        return;
+        return result;
     };
 
     // TODO 插入排序
-
+    var insert = function(array) {
+    };
 
     // 返回
     return {
         bubble: bubble,
+        insert: insert
     };
 });

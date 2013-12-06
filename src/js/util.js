@@ -1,7 +1,7 @@
 // 工具类
 define(function() {
     // 生成随机数数组
-    var generateRandomList = function(upper, length) {
+    var randomArray = function(upper, length) {
         var result = [];
         var temp;
 
@@ -23,49 +23,18 @@ define(function() {
         return result;
     };
 
-    // 得到画布上下文
-    var draw = function() {
-        canvas = document.getElementById("canvas");
-
-        if (canvas.getContext) {
-            ctx = canvas.getContext("2d");
-            return ctx;
-        }
-
-        return null;
-    };
-
-    // 绘制矩形
-    var drawRect = function(maxLength, x, height) {
-        var canvas = draw();
-        canvas.fillStyle = "#2E81CE";
-        canvas.strokeStyle = "red";
-        canvas.lineWidth = 1;
-
-        x = x * 10;
-        height = height;
-        maxLength = maxLength;
-        // 填充
-        canvas.fillRect(x, maxLength - height + 10, 10, height);
-        // 描线
-        canvas.strokeRect(x, maxLength - height + 10, 10, height);
-    };
-
-    // 绘制数组
-    var drawArray = function(array) {
-        // 清除画布
-        var canvas = draw();
-        canvas.clearRect(0, 0, 1000, 1000);
-
-        for (i = 0; i < array.length; i++) {
-            drawRect(array[array.length - 1], i, array[i]);
+    // 绘制初始数组图形
+    var initShape = function(data, n, blocks) {
+        for (var i = 0; i < n; i++) {
+            blocks.push(document.createElement("div"));
+            blocks[i].style.width = 100.0 / n + "%";
+            blocks[i].style.height = data[i] * 100.0 / n + "%";
+            document.getElementById("canvas").appendChild(blocks[i]);
         }
     };
 
     return {
-        generateRandomList: generateRandomList,
-        draw: draw,
-        drawRect: drawRect,
-        drawArray: drawArray,
+        randomArray: randomArray,
+        initShape: initShape
     };
 });
