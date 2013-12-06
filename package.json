@@ -1,0 +1,26 @@
+{
+  "name": "alg",
+  "version": "0.1.0",
+  "description": "javascript sort alg",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/worldask/alg"
+  },
+  "keywords": [
+    "javascript",
+    "sort",
+    "alg"
+  ],
+  "author": "worldask",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/worldask/alg/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2"
+  }
+}
