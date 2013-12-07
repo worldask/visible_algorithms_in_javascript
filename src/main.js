@@ -1,11 +1,12 @@
 require(['js/util', 'js/sort'], function(util, sort){
-    var n = 100, i = 0;
+    var n = 200, i = 0;
     var data = [], swap_history = [], blocks = [];
 
     data = util.randomArray(n);
     util.initShape(data, n, blocks);
     // swap_history = sort.bubble(data);
-    swap_history = sort.insert(data);
+    // swap_history = sort.insert(data);
+    swap_history = sort.shell(data);
 
     // replay
     console.time('replay time-consuming');
