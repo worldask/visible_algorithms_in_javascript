@@ -1,16 +1,33 @@
 // 工具类
 define(function() {
+    // 生成乱序数组
+    var randomArray = function (legnth) {
+        var i, result = [];
+
+        // 生成正序自然数数组
+        for (i = 1; i <= legnth; i++) {
+            result.push(i);
+        }
+
+        // 乱序
+        for (i = result.length - 1; i > 0; i--) {
+            result[i] = result.splice(Math.floor(Math.random() * i), 1, result[i])[0];
+        }
+
+        console.log(result);
+        return result;
+    }
+
     // 生成随机数数组
-    var randomArray = function(upper, length) {
+    var randomArray1 = function(length) {
         var result = [];
         var temp;
 
         for (i = 0; i < length; i++) {
             // 生成随机数
-            temp = Math.floor(Math.random() * upper + 1);
+            temp = Math.floor(Math.random() * length + 1);
 
             // 去重
-            // if (_.indexOf(result, temp) >= 0) {
             if (result.indexOf(temp) >= 0) {
                 i--;
                 continue;
@@ -33,8 +50,21 @@ define(function() {
         }
     };
 
+    // 根据排序记录重绘排序过程
+    var drawSorting = function (history, blocks) {
+        var curr_swap = history.shift();
+        var i = curr_swap[0];
+        var j = curr_swap[1];
+        var t = blocks[i].style.height;
+
+        blocks[i].style.height = blocks[j].style.height;
+        blocks[j].style.height = t;
+    };
+
     return {
         randomArray: randomArray,
-        initShape: initShape
+        randomArray1: randomArray1,
+        initShape: initShape,
+        drawSorting: drawSorting
     };
 });
