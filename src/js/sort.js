@@ -1,9 +1,8 @@
 // 排序算法
-define (function() {
-    // TODO 排序计时
-    
+define (function() {    
     // 冒泡排序
     var bubble = function(array) {
+        console.time('Bubble time-consuming');
         var i, j, swapped, temp, result = [];
 
         // 遍历数组
@@ -27,6 +26,7 @@ define (function() {
                 break;
             }
         }
+        console.timeEnd('Bubble time-consuming');
 
         console.log(array);
 

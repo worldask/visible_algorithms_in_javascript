@@ -1,6 +1,6 @@
 // 工具类
 define(function() {
-    // 生成乱序数组
+    // 生成从1开始的乱序自然数数组
     var randomArray = function (legnth) {
         var i, result = [];
 
@@ -19,13 +19,13 @@ define(function() {
     }
 
     // 生成随机数数组
-    var randomArray1 = function(length) {
+    var randomArray1 = function(upper, length) {
         var result = [];
         var temp;
 
         for (i = 0; i < length; i++) {
             // 生成随机数
-            temp = Math.floor(Math.random() * length + 1);
+            temp = Math.floor(Math.random() * upper + 1);
 
             // 去重
             if (result.indexOf(temp) >= 0) {
