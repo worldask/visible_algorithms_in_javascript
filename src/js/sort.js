@@ -1,43 +1,64 @@
-// 排序算法
+// sorting algorithm
 define (function() {    
-    // 冒泡排序
+    // bubble sorting
     var bubble = function(array) {
-        console.time('Bubble time-consuming');
+        console.time('bubble time-consuming');
+
         var i, j, swapped, temp, result = [];
 
-        // 遍历数组
         for (i = array.length; i > 0; i--) {
             swapped = 0;
 
             for (j = 0; j < i; j++) {
-                if (array[j] - array[j + 1] > 0) {
+                if (array[j] > array[j + 1]) {
                     temp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = temp;
                     swapped = 1;
 
-                    // 将发生交换的两个数组索引写入交换记录
-                    result.push([j, j + 1])
+                    // write log
+                    result.push([j, j + 1]);
                 }
             }
 
-            // 如果没有发生交换，则排序完成
+            // if no swaps, finished
             if (swapped = 0) {
                 break;
             }
         }
-        console.timeEnd('Bubble time-consuming');
 
+        console.timeEnd('bubble time-consuming');
         console.log(array);
-
         return result;
     };
 
-    // TODO 插入排序
+    // insert sorting
     var insert = function(array) {
+        console.time('insert time-consuming');
+
+        var i, j, temp, result = [];
+
+        for (i = 1; i < array.length; i++) {
+            temp = array[i];
+
+            for (j = i - 1; j >= 0; j--) {
+                if (array[j] > temp) {
+                    array[j + 1] = array[j];
+
+                    // write log
+                    result.push([j, j + 1]);
+                } else {
+                    break;
+                }
+            }
+            array[j + 1] = temp;
+        }
+
+        console.timeEnd('insert time-consuming');
+        console.log(array);
+        return result;
     };
 
-    // 返回
     return {
         bubble: bubble,
         insert: insert

@@ -1,15 +1,16 @@
-// 工具类
+// util.js
+
 define(function() {
-    // 生成从1开始的乱序自然数数组
+    // generate natural number random array start from 1
     var randomArray = function (legnth) {
         var i, result = [];
 
-        // 生成正序自然数数组
+        // generate ascending natural number array start from 1
         for (i = 1; i <= legnth; i++) {
             result.push(i);
         }
 
-        // 乱序
+        // random
         for (i = result.length - 1; i > 0; i--) {
             result[i] = result.splice(Math.floor(Math.random() * i), 1, result[i])[0];
         }
@@ -18,16 +19,16 @@ define(function() {
         return result;
     }
 
-    // 生成随机数数组
+    // generate natural number random array
     var randomArray1 = function(upper, length) {
         var result = [];
         var temp;
 
         for (i = 0; i < length; i++) {
-            // 生成随机数
+            // random
             temp = Math.floor(Math.random() * upper + 1);
 
-            // 去重
+            // remove repeated
             if (result.indexOf(temp) >= 0) {
                 i--;
                 continue;
@@ -40,7 +41,7 @@ define(function() {
         return result;
     };
 
-    // 绘制初始数组图形
+    // draw random array
     var initShape = function(data, n, blocks) {
         for (var i = 0; i < n; i++) {
             blocks.push(document.createElement("div"));
@@ -50,7 +51,7 @@ define(function() {
         }
     };
 
-    // 根据排序记录重绘排序过程
+    // replay sorting process
     var drawSorting = function (history, blocks) {
         var curr_swap = history.shift();
         var i = curr_swap[0];
