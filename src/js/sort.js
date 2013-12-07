@@ -85,9 +85,15 @@ define (function() {
         return result;
     };
 
+    // quick sorting 1st
+    var quick1 = function(array) {
+
+    };
+
     return {
         bubble: bubble,
         insert: insert,
-        shell: shell
+        shell: shell,
+        quick1: quick1 
     };
 });

@@ -1,10 +1,30 @@
-<script src="vendor/require.js" defer async="true" data-main="main"></script>
-<style>
-body {padding: 15px;}
-#canvas {height: 300px; width: 100%;}
-#canvas div {display: inline-block; background-color: orange;}
-</style>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <style>
+        body {padding: 15px;}
+        #canvas {height: 300px; width: 100%;}
+        #canvas div {display: inline-block; background-color: orange;}
+    </style>
+</head>
 
 <body>
+    <div>
+        array length: <input id="arrayLength" value="100" size="2" />
+        replay speed: swap/<input id="speed" value="5" size="2" />ms
+    </div>
+    <div>
+        <input type="button" value="Reset" id="btnReset" />
+        <input type="button" value="stop" id="btnStop" />
+    </div>
+    <div>
+        <input type="button" value="Bubble" id="btnBubble" />
+        <input type="button" value="Insert" id="btnInsert" />
+        <input type="button" value="Shell" id="btnShell" />
+    </div>
     <div id="canvas"></div>
+
+    <script src="vendor/require.js" defer async="true" data-main="main"></script>
 </body>
+</html>

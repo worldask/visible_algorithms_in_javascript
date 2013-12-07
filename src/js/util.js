@@ -43,6 +43,7 @@ define(function() {
 
     // draw random array
     var initShape = function(data, n, blocks) {
+        document.getElementById("canvas").innerHTML = '';
         for (var i = 0; i < n; i++) {
             blocks.push(document.createElement("div"));
             blocks[i].style.width = 100.0 / n + "%";
@@ -62,10 +63,53 @@ define(function() {
         blocks[j].style.height = t;
     };
 
+    /*
+     * add event listener
+     * obj        object to be listened
+     * eventName  event name
+     * fun        function name
+     * param      function parameter
+     */
+    var addEventHandler = function (obj, eventName, fun, param) {
+        var fn = fun;
+        if (param) {
+            fn = function(e) {
+                // call fun and all parameter
+                fun.call(this, param);
+            }
+        }
+        if (obj.addEventListener) {
+            obj.addEventListener(eventName, fn, false);
+        } else if (obj.attachEvent) {
+            obj.attachEvent('on' + eventName, fn);
+        } else {
+            obj["on" + eventName] = fn;
+        }
+    }
+ 
+     /*
+     * remove event listener
+     * obj        object to be listened
+     * eventName  event name
+     * fun        function name
+     */
+    var removeEventHandler = function (obj, eventName, fun) {
+        if (obj.removeEventListener){
+            obj.removeEventListener(eventName, fun, false);
+        } else if (obj.detachEvent) {
+            obj.detachEvent("on" + eventName, fun);
+        } else{
+            delete obj["on" + eventName];
+        }
+    }
+
+
     return {
         randomArray: randomArray,
         randomArray1: randomArray1,
         initShape: initShape,
-        drawSorting: drawSorting
+        drawSorting: drawSorting,
+        addEventHandler: addEventHandler,
+        removeEventHandler: removeEventHandler
     };
 });
