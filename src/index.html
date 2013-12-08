@@ -5,14 +5,27 @@
     <style>
         body {padding: 15px;}
         #canvas {height: 300px; width: 100%;}
-        #canvas div {display: inline-block; background-color: orange;}
+        #canvas div {display: inline-block;}
+        .color-block {display: inline-block; width: 30px; height: 30px; cursor: pointer;}
     </style>
 </head>
 
 <body>
     <div>
-        array length: <input id="arrayLength" value="100" size="2" />
-        replay speed: swap/<input id="speed" value="5" size="2" />ms
+        <div>Choose a color</div>
+        <div>
+            <input type="hidden" id="selectedColor" value="#428bca" />
+            <div class="color-block" style="background-color: #cccccc;"></div>
+            <div class="color-block" style="background-color: #428bca;"></div>
+            <div class="color-block" style="background-color: #5cb85c;"></div>
+            <div class="color-block" style="background-color: #5bc0de;"></div>
+            <div class="color-block" style="background-color: #f0ad4e;"></div>
+            <div class="color-block" style="background-color: #d9534f;"></div>
+        </div>
+    </div>
+    <div>
+        Array length: <input id="arrayLength" value="100" size="2" />
+        Replay speed: <input id="speed" value="5" size="2" />swap/ms
     </div>
     <div>
         <input type="button" value="Reset" id="btnReset" />
@@ -23,6 +36,7 @@
         <input type="button" value="Insert" id="btnInsert" />
         <input type="button" value="Shell" id="btnShell" />
     </div>
+
     <div id="canvas"></div>
 
     <script src="vendor/require.js" defer async="true" data-main="main"></script>

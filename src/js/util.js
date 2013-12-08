@@ -17,7 +17,7 @@ define(function() {
 
         console.log(result);
         return result;
-    }
+    };
 
     // generate natural number random array
     var randomArray1 = function(upper, length) {
@@ -44,11 +44,26 @@ define(function() {
     // draw random array
     var initShape = function(data, n, blocks) {
         document.getElementById("canvas").innerHTML = '';
+        var color = document.getElementById("selectedColor").value;
+
         for (var i = 0; i < n; i++) {
             blocks.push(document.createElement("div"));
+            blocks[i].style.backgroundColor = color;
             blocks[i].style.width = 100.0 / n + "%";
             blocks[i].style.height = data[i] * 100.0 / n + "%";
             document.getElementById("canvas").appendChild(blocks[i]);
+        }
+    };
+
+    // change blocks color
+    var changeColor = function(color) {
+        document.getElementById("selectedColor").value = color;
+        var blocks = document.getElementById("canvas").children;
+        
+        for (block in blocks) {
+            if (typeof blocks[block] == 'object') {
+                blocks[block].style.backgroundColor = color;
+            }
         }
     };
 
@@ -85,7 +100,7 @@ define(function() {
         } else {
             obj["on" + eventName] = fn;
         }
-    }
+    };
  
      /*
      * remove event listener
@@ -101,13 +116,14 @@ define(function() {
         } else{
             delete obj["on" + eventName];
         }
-    }
+    };
 
 
     return {
         randomArray: randomArray,
         randomArray1: randomArray1,
         initShape: initShape,
+        changeColor: changeColor,
         drawSorting: drawSorting,
         addEventHandler: addEventHandler,
         removeEventHandler: removeEventHandler

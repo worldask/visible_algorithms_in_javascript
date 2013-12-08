@@ -58,4 +58,13 @@ require(['js/util', 'js/sort'], function(util, sort){
 
     document.getElementById("btnReset").onclick = init;
     document.getElementById("btnStop").onclick = stop;
+    
+
+    var colorBlocks = document.getElementsByClassName("color-block");
+    var selectedColor;
+    for (block in colorBlocks) {
+        if (typeof colorBlocks[block] == 'object') {
+            util.addEventHandler(colorBlocks[block], 'click', util.changeColor, colorBlocks[block].style.backgroundColor);
+        }
+    }
 });
