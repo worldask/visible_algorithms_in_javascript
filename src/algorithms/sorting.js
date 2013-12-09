@@ -2,8 +2,9 @@
 define (function() {    
     // bubble sorting
     var bubble = function(array) {
-        var i, j, swapped, temp, result = [];
-        console.time('bubble time-consuming');
+        var i, j, swapped, temp, result = ['swaps', 'timeSorting'], timeStart, timeEnd;
+        result['swaps'] = [];
+        timeStart = new Date().getTime();
 
         for (i = array.length; i > 0; i--) {
             swapped = 0;
@@ -16,7 +17,7 @@ define (function() {
                     swapped = 1;
 
                     // write log
-                    result.push([j, j + 1]);
+                    result['swaps'].push([j, j + 1]);
                 }
             }
 
@@ -26,15 +27,18 @@ define (function() {
             }
         }
 
-        console.timeEnd('bubble time-consuming');
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
         console.log(array);
+
         return result;
     };
 
     // insert sorting
     var insert = function(array) {
-        var i, j, temp, result = [];
-        console.time('insert time-consuming');
+        var i, j, temp, result = ['swaps', 'timeSorting'], timeStart, timeEnd;
+        result['swaps'] = [];
+        timeStart = new Date().getTime();
 
         for (i = 1; i < array.length; i++) {
             temp = array[i];
@@ -42,7 +46,7 @@ define (function() {
             for (j = i - 1; j >= 0; j--) {
                 if (array[j] > temp) {
                     array[j + 1] = array[j];
-                    result.push([j, j + 1]);
+                    result['swaps'].push([j, j + 1]);
                 } else {
                     break;
                 }
@@ -50,15 +54,18 @@ define (function() {
             array[j + 1] = temp;
         }
 
-        console.timeEnd('insert time-consuming');
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
         console.log(array);
+
         return result;
     };
 
     // shell sorting
     var shell = function (array) {
-        var i, j, h, temp, step = 3, result = [];
-        console.time('shell time-consuming');
+        var i, j, h, temp, step = 3, result = ['swaps', 'timeSorting'], timeStart, timeEnd;
+        result['swaps'] = [];
+        timeStart = new Date().getTime();
 
         // find starting h
         for (h = 1; h <= parseInt(array.length / (step * step)); h = step * h + 1) {
@@ -71,7 +78,7 @@ define (function() {
                 for (j = i - h; j >= 0; j -= h) {
                     if (array[j] > temp) {
                         array[j + h] = array[j];
-                        result.push([j, j + h]);
+                        result['swaps'].push([j, j + h]);
                     } else {
                         break;
                     }
@@ -80,8 +87,10 @@ define (function() {
             }
         }
 
-        console.timeEnd('shell time-consuming');
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
         console.log(array);
+        
         return result;
     };
 

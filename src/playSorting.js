@@ -2,6 +2,7 @@
 
 define(['util', 'algorithms/sorting'], function(util, sorting){
     var n, speed, timer, flagPlaying = 0, flagPlayed = 0;
+    var swaps, timeSorting, timePlayStart, timePlayEnd;
     var data = [], swapHistory = [], blocks = [];
 
     var init = function() {
@@ -47,19 +48,25 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
 
             speed = document.getElementById("speed").value;
             swapHistory = sortMethod(data);
+            swaps = swapHistory['swaps'].length;
+            timeSorting = swapHistory['timeSorting'];
+
+            timePlayStart = new Date().getTime();
             go();
         }
     };
 
     var go = function() {
         flagPlaying = 1;
-        console.time('replay time-consuming');
+        // console.time('replay time-consuming');
 
-        if (swapHistory.length > 0) {
-            var current = swapHistory.shift();
+        if (swapHistory['swaps'].length > 0) {
+            var current = swapHistory['swaps'].shift();
             swap(current, blocks)
         } else {
-            console.timeEnd('replay time-consuming');
+            timePlayEnd = new Date().getTime();
+            // console.timeEnd('replay time-consuming');
+            _writeStatistics();
             flagPlaying = 0;
             flagPlayed = 1;
             window.clearTimeout(timer);
@@ -85,6 +92,7 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
             blocks = [];
             data = util.randomArray(n);
             initGraph(data, n, blocks);
+            document.getElementById("statistics").innerHTML= "";
         }
     };
 
@@ -96,6 +104,15 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
 
         blocks[i].style.height = blocks[j].style.height;
         blocks[j].style.height = t;
+    };
+
+    var _writeStatistics = function() {
+        var html = '';
+
+        html = 'swaps: ' + swaps + ' times, ';
+        html += 'sorting time consuming: ' + timeSorting + ' ms, '
+        html += 'play time consuming: ' + (timePlayEnd - timePlayStart) + ' ms';
+        document.getElementById("statistics").innerHTML= html;
     };
 
     // change blocks color
