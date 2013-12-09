@@ -13,7 +13,6 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
 
         // bind event handler to control buttons 
         document.getElementById("btnReset").onclick = reset;
-        document.getElementById("btnStop").onclick = stop;
         
         // bind event handler to color picker 
         var colorBlocks = document.getElementsByClassName("color-block");
@@ -24,6 +23,8 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
                 util.addEventHandler(colorBlocks[block], 'click', changeColor, colorBlocks[block].style.backgroundColor);
             }
         }
+
+        start();
     };
 
     // draw initial graph
@@ -43,7 +44,7 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
     var ready = function(sortMethod) {
         if (flagPlaying == 0) {
             if (flagPlayed == 1) {
-                reset();
+                start();
             }
 
             speed = document.getElementById("speed").value;
@@ -77,15 +78,13 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
         timer = window.setTimeout(go, speed);
     };
 
-    var stop = function() {
-        if (flagPlaying == 1) {
-            flagPlaying = 0;
-            window.clearTimeout(timer);
-            reset();
-        }
+    var reset = function() {
+        flagPlaying = 0;
+        window.clearTimeout(timer);
+        start();
     }
 
-    var reset = function() {
+    var start = function() {
         if (flagPlaying == 0 || flagPlayed == 1) {
             flagPlayed = 0;
             n = document.getElementById("arrayLength").value;
@@ -128,7 +127,6 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
     };
 
     return {
-        reset: reset,
         init: init
     };
 });
