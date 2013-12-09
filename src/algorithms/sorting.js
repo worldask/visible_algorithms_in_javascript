@@ -137,13 +137,12 @@ define (function() {
             quick1(array, i + 1, right);
         }
 
-
         timeEnd = new Date().getTime();
         result['timeSorting'] = timeEnd - timeStart;
         console.log(array);
 
         return result;
-    };
+    }
 
     return {
         bubble: bubble,

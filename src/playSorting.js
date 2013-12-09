@@ -14,15 +14,11 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
 
         // bind event handler to control buttons 
         document.getElementById("btnReset").onclick = reset;
-        
+
         // bind event handler to color picker 
         var colorBlocks = document.getElementsByClassName("color-block");
-        var selectedColor;
-
-        for (block in colorBlocks) {
-            if (typeof colorBlocks[block] == 'object') {
-                util.addEventHandler(colorBlocks[block], 'click', changeColor, colorBlocks[block].style.backgroundColor);
-            }
+        for (var i = 0; i < colorBlocks.length; i++) {
+            util.addEventHandler(colorBlocks[i], 'click', changeColor, colorBlocks[i].style.backgroundColor);
         }
 
         start();
@@ -69,6 +65,7 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
             timePlayEnd = new Date().getTime();
             // console.timeEnd('replay time-consuming');
             _writeStatistics();
+
             flagPlaying = 0;
             flagPlayed = 1;
             window.clearTimeout(timer);
@@ -82,6 +79,7 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
     var reset = function() {
         flagPlaying = 0;
         window.clearTimeout(timer);
+        swapHistory['swaps'] = [];
         start();
     }
 
@@ -92,6 +90,7 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
             blocks = [];
             data = util.randomArray(n);
             initGraph(data, n, blocks);
+
             document.getElementById("statistics").innerHTML= "";
         }
     };
@@ -120,10 +119,8 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
         document.getElementById("selectedColor").value = color;
         var blocks = document.getElementById("canvas").children;
 
-        for (block in blocks) {
-            if (typeof blocks[block] == 'object') {
-                blocks[block].style.backgroundColor = color;
-            }
+        for (var i = 0; i < blocks.length; i++) {
+            blocks[i].style.backgroundColor = color;
         }
     };
 
