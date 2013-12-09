@@ -1,9 +1,11 @@
 // sorting algorithm
-define (function() {    
+define (function() {
+    var result = ['swaps', 'timeSorting'], timeStart, timeEnd;
+    result['swaps'] = [];
+
     // bubble sorting
     var bubble = function(array) {
-        var i, j, swapped, temp, result = ['swaps', 'timeSorting'], timeStart, timeEnd;
-        result['swaps'] = [];
+        var i, j, swapped, temp;
         timeStart = new Date().getTime();
 
         for (i = array.length; i > 0; i--) {
@@ -36,8 +38,7 @@ define (function() {
 
     // insert sorting
     var insert = function(array) {
-        var i, j, temp, result = ['swaps', 'timeSorting'], timeStart, timeEnd;
-        result['swaps'] = [];
+        var i, j, temp;
         timeStart = new Date().getTime();
 
         for (i = 1; i < array.length; i++) {
@@ -63,8 +64,7 @@ define (function() {
 
     // shell sorting
     var shell = function (array) {
-        var i, j, h, temp, step = 3, result = ['swaps', 'timeSorting'], timeStart, timeEnd;
-        result['swaps'] = [];
+        var i, j, h, temp, step = 3;
         timeStart = new Date().getTime();
 
         // find starting h
@@ -90,19 +90,65 @@ define (function() {
         timeEnd = new Date().getTime();
         result['timeSorting'] = timeEnd - timeStart;
         console.log(array);
-        
+
         return result;
     };
 
     // quick sorting 1st
-    var quick1 = function(array) {
+    var quick1 = function(array, left, right) {
+        var i = 0, j = 0, temp, timeStart, timeEnd;
+        timeStart = new Date().getTime();
 
+        if (left === undefined) {
+            left = 0;
+        }
+        if (right === undefined) {
+            right = array.length - 1;
+        }
+
+        if (right > left) {
+            i = left - 1;
+            j = right;
+
+            for (;;) {
+                while (array[++i] < array[right]) {
+                }
+                while (j > 0) {
+                    if (array[--j] <= array[right]) {
+                        break;
+                    }
+                }
+                if (i >= j) {
+                    break;
+                }
+
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                result['swaps'].push([i, j]);
+            }
+
+            temp = array[i];
+            array[i] = array[right];
+            array[right] = temp;
+            result['swaps'].push([i, right]);
+
+            quick1(array, left, i - 1);
+            quick1(array, i + 1, right);
+        }
+
+
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
+        console.log(array);
+
+        return result;
     };
 
     return {
         bubble: bubble,
         insert: insert,
         shell: shell,
-        quick1: quick1 
+        quick1: quick1
     };
 });
