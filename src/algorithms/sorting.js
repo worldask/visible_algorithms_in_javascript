@@ -3,6 +3,21 @@ define (function() {
     var result = ['swaps', 'timeSorting'], timeStart, timeEnd;
     result['swaps'] = [];
 
+    var _swap = function(array, x, y, flagLog) {
+        var temp;
+
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+        result['swaps'].push([x, y]);
+
+        if (flagLog !== undefined && flagLog === 1) {
+            console.log(array);
+        }
+
+        return;
+    };
+
     // bubble sorting
     var bubble = function(array) {
         var i, j, swapped, temp;
@@ -13,13 +28,8 @@ define (function() {
 
             for (j = 0; j < i; j++) {
                 if (array[j] > array[j + 1]) {
-                    temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
+                    _swap(array, j, j + 1);
                     swapped = 1;
-
-                    // write log
-                    result['swaps'].push([j, j + 1]);
                 }
             }
 
@@ -118,18 +128,10 @@ define (function() {
                     break;
                 }
 
-                temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-                result['swaps'].push([i, j]);
-                console.log(array);
+                _swap(array, i, j);
             }
-
-            temp = array[i];
-            array[i] = array[right];
-            array[right] = temp;
-            result['swaps'].push([i, right]);
-            console.log(array);
+            
+            _swap(array, i, right);
 
             quick1(array, left, i - 1);
             quick1(array, i + 1, right);
