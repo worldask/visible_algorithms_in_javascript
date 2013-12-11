@@ -109,8 +109,8 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
         var html = '';
 
         html = 'swaps: ' + swaps + ' times, ';
-        html += 'sorting time consuming: ' + timeSorting + ' ms, '
-        html += 'play time consuming: ' + (timePlayEnd - timePlayStart) + ' ms';
+        html += 'sorting time: ' + timeSorting + ' ms, '
+        html += 'play time: ' + (timePlayEnd - timePlayStart) + ' ms';
         document.getElementById("statistics").innerHTML= html;
     };
 

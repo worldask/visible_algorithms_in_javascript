@@ -94,11 +94,12 @@ define (function() {
         return result;
     };
 
-    // quick sorting 1st
+    // quick sorting 1st: choose the leftest & the rightest elements as benchmark
     var quick1 = function(array, left, right) {
         var i = 0, j = 0, temp, timeStart, timeEnd;
         timeStart = new Date().getTime();
 
+        // assign initial value to left & right
         if (left === undefined) {
             left = 0;
         }
@@ -107,17 +108,12 @@ define (function() {
         }
 
         if (right > left) {
-            i = left - 1;
-            j = right;
+            while (true) {
+                for (i = left; array[i] < array[right]; i++) {
+                }
+                for (j = right - 1; array[j] > array[right] && j > 0; j--) {
+                }
 
-            for (;;) {
-                while (array[++i] < array[right]) {
-                }
-                while (j > 0) {
-                    if (array[--j] <= array[right]) {
-                        break;
-                    }
-                }
                 if (i >= j) {
                     break;
                 }
@@ -126,12 +122,14 @@ define (function() {
                 array[i] = array[j];
                 array[j] = temp;
                 result['swaps'].push([i, j]);
+                console.log(array);
             }
 
             temp = array[i];
             array[i] = array[right];
             array[right] = temp;
             result['swaps'].push([i, right]);
+            console.log(array);
 
             quick1(array, left, i - 1);
             quick1(array, i + 1, right);
@@ -139,10 +137,9 @@ define (function() {
 
         timeEnd = new Date().getTime();
         result['timeSorting'] = timeEnd - timeStart;
-        console.log(array);
 
         return result;
-    }
+    };
 
     return {
         bubble: bubble,
