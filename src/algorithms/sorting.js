@@ -152,13 +152,13 @@ define (function() {
         // if (right > left) {
             mid = parseInt((left + right) / 2);
 
-            if (left > mid) {
+            if (array[left] > array[mid]) {
                 _swap(array, left, mid, 1);
             }
-            if (left > right) {
+            if (array[left] > array[right]) {
                 _swap(array, left, right, 1);
             }
-            if (mid > right) {
+            if (array[mid] > array[right]) {
                 _swap(array, mid, right, 1);
             }
             _swap(array, mid, right - 1, 1);
@@ -195,12 +195,69 @@ define (function() {
         return result1;
     }
 
+    // quick sorting 3th: choose the leftest & the rightest & the middle elements as benchmark
+    var _quick3 = function(array, left, right) {
+        var i = 0, j = 0, mid = 0, timeStart, timeEnd;
+        timeStart = new Date().getTime();
+
+        while (right - left >= 9) {
+            mid = parseInt((left + right) / 2);
+
+            if (array[left] > array[mid]) {
+                _swap(array, left, mid, 1);
+            }
+            if (array[left] > array[right]) {
+                _swap(array, left, right, 1);
+            }
+            if (array[mid] > array[right]) {
+                _swap(array, mid, right, 1);
+            }
+            _swap(array, mid, right - 1, 1);
+
+            while (true) {
+                for (i = left + 1; array[i] < array[right - 1] && i < right - 1; i++) {
+                }
+                for (j = right - 2; array[j] > array[right - 1] && j > 1; j--) {
+                }
+
+                if (i >= j) {
+                    break;
+                }
+
+                _swap(array, i, j);
+            }
+            
+            _swap(array, i, right - 1);
+
+            if (i - left > right - i) {
+                _quick3(array, i + 1, right);
+                right = i - 1;
+            } else { 
+                _quick3(array, left, i - 1);
+                left = i + 1;
+            }
+        }
+
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
+
+        return result;
+    };
+
+    var quick3 = function(array) {
+        var result1 = _quick3(array, 0, array.length - 1);
+        insert(array);
+
+        return result1;
+    }
+
 
     return {
         bubble: bubble,
         insert: insert,
         shell: shell,
         quick1: quick1,
-        quick2: quick2
+        quick2: quick2,
+        quick3: quick3
     };
 });
