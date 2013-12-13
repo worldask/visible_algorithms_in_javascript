@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <form name="form1">
     <div>
         <div>Choose a color</div>
         <div>
@@ -29,6 +30,9 @@
     </div>
     <div>
         <input type="button" value="Reset" id="btnReset" />
+        <input type="radio" value="Random" name="arrayDirection" checked /> Random
+        <input type="radio" value="Asc" name="arrayDirection" /> Asc
+        <input type="radio" value="Desc" name="arrayDirection" /> Desc
     </div>
     <div>
         <input type="button" value="Bubble" id="btnBubble" />
@@ -37,6 +41,7 @@
         <input type="button" value="Quick1" id="btnQuick1" />
         <input type="button" value="Quick2" id="btnQuick2" />
     </div>
+    </form>
 
     <div id="canvas"></div>
 

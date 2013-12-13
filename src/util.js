@@ -1,18 +1,34 @@
 // util.js
 
 define(function() {
-    // generate natural number random array start from 1
-    var randomArray = function (legnth) {
+    // generate natural number array
+    var generateArray = function (length, direction) {
         var i, result = [];
 
-        // generate ascending natural number array start from 1
-        for (i = 1; i <= legnth; i++) {
-            result.push(i);
-        }
+        switch (direction) {
+            case 'Asc':
+                // generate ascending natural number array start from 1
+                for (i = 1; i <= length; i++) {
+                    result.push(i);
+                }
+                break;
+            case 'Desc':
+                // generate descending natural number array end with 1
+                for (i = length; i >= 1; i--) {
+                    result.push(i);
+                }
+                break;
+            default:            
+                // generate ascending natural number array start from 1
+                for (i = 1; i <= length; i++) {
+                    result.push(i);
+                }
 
-        // random
-        for (i = result.length - 1; i > 0; i--) {
-            result[i] = result.splice(Math.floor(Math.random() * i), 1, result[i])[0];
+                // random
+                for (i = result.length - 1; i > 0; i--) {
+                    result[i] = result.splice(Math.floor(Math.random() * i), 1, result[i])[0];
+                }
+                break;
         }
 
         console.log(result);
@@ -84,7 +100,7 @@ define(function() {
     };
 
     return {
-        randomArray: randomArray,
+        generateArray: generateArray,
         addEventHandler: addEventHandler,
         removeEventHandler: removeEventHandler
     };

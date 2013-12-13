@@ -88,8 +88,9 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
         if (flagPlaying == 0 || flagPlayed == 1) {
             flagPlayed = 0;
             n = document.getElementById("arrayLength").value;
+            var direction = getDirection();
             blocks = [];
-            data = util.randomArray(n);
+            data = util.generateArray(n, direction);
             initGraph(data, n, blocks);
 
             document.getElementById("statistics").innerHTML= "";
@@ -124,6 +125,21 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
             blocks[i].style.backgroundColor = color;
         }
     };
+
+    // get array direction
+    var getDirection = function() {
+        var result = '';
+        var directions = document.getElementsByName("arrayDirection");
+
+        for (var i = 0; i < directions.length; i++) {
+            if (directions[i].checked === true) {
+               result = directions[i].value; 
+               break;
+            }
+        }
+
+        return result;
+    }
 
     return {
         init: init
