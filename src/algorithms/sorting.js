@@ -1,6 +1,6 @@
 // sorting algorithm
 define (function() {
-    var result = ['swaps', 'timeSort'], timeStart, timeEnd;
+    var result = ['swaps', 'timeSorting'], timeStart, timeEnd;
     result['swaps'] = [];
 
     var _swap = function(array, x, y, flagLog) {
@@ -40,7 +40,7 @@ define (function() {
         }
 
         timeEnd = new Date().getTime();
-        result['timeSort'] = timeEnd - timeStart;
+        result['timeSorting'] = timeEnd - timeStart;
         console.log(array);
 
         return result;
@@ -66,7 +66,7 @@ define (function() {
         }
 
         timeEnd = new Date().getTime();
-        result['timeSort'] = timeEnd - timeStart;
+        result['timeSorting'] = timeEnd - timeStart;
         console.log(array);
 
         return result;
@@ -98,30 +98,21 @@ define (function() {
         }
 
         timeEnd = new Date().getTime();
-        result['timeSort'] = timeEnd - timeStart;
+        result['timeSorting'] = timeEnd - timeStart;
         console.log(array);
 
         return result;
     };
 
     // quick sort 1st: choose the leftest & the rightest elements as benchmark
-    var quick1 = function(array, left, right) {
-        var i = 0, j = 0, timeStart, timeEnd;
-        timeStart = new Date().getTime();
-
-        // assign initial value to left & right
-        if (left === undefined) {
-            left = 0;
-        }
-        if (right === undefined) {
-            right = array.length - 1;
-        }
+    var _quick1 = function(array, left, right) {
+        var i = 0, j = 0;
 
         if (right > left) {
             while (true) {
                 for (i = left; array[i] < array[right]; i++) {
                 }
-                for (j = right - 1; array[j] > array[right] && j > 0; j--) {
+                for (j = right - 1; array[j] > array[right] && j > left; j--) {
                 }
 
                 if (i >= j) {
@@ -133,20 +124,27 @@ define (function() {
             
             _swap(array, i, right);
 
-            quick1(array, left, i - 1);
-            quick1(array, i + 1, right);
+            _quick1(array, left, i - 1);
+            _quick1(array, i + 1, right);
         }
-
-        timeEnd = new Date().getTime();
-        result['timeSort'] = timeEnd - timeStart;
 
         return result;
     };
 
+    var quick1 = function(array) {
+        timeStart = new Date().getTime();
+
+        result = _quick1(array, 0, array.length - 1);
+
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
+
+        return result;
+    }
+
     // quick sort 2nd: choose the leftest & the rightest & the middle elements as benchmark
     var _quick2 = function(array, left, right) {
-        var i = 0, j = 0, mid = 0, timeStart, timeEnd;
-        timeStart = new Date().getTime();
+        var i = 0, j = 0, mid = 0;
 
         if (right - left >= 9) {
         // if (right > left) {
@@ -166,7 +164,7 @@ define (function() {
             while (true) {
                 for (i = left + 1; array[i] < array[right - 1] && i < right - 1; i++) {
                 }
-                for (j = right - 2; array[j] > array[right - 1] && j > 1; j--) {
+                for (j = right - 2; array[j] > array[right - 1] && j > left; j--) {
                 }
 
                 if (i >= j) {
@@ -182,23 +180,24 @@ define (function() {
             _quick2(array, i + 1, right);
         }
 
-        timeEnd = new Date().getTime();
-        result['timeSort'] = timeEnd - timeStart;
-
         return result;
     };
 
     var quick2 = function(array) {
-        var result1 = _quick2(array, 0, array.length - 1);
+        timeStart = new Date().getTime();
+
+        result = _quick2(array, 0, array.length - 1);
         insertion(array);
 
-        return result1;
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
+
+        return result;
     }
 
     // quick sort 3th: choose the leftest & the rightest & the middle elements as benchmark
     var _quick3 = function(array, left, right) {
-        var i = 0, j = 0, mid = 0, timeStart, timeEnd;
-        timeStart = new Date().getTime();
+        var i = 0, j = 0, mid = 0;
 
         while (right - left >= 9) {
             mid = parseInt((left + right) / 2);
@@ -217,7 +216,7 @@ define (function() {
             while (true) {
                 for (i = left + 1; array[i] < array[right - 1] && i < right - 1; i++) {
                 }
-                for (j = right - 2; array[j] > array[right - 1] && j > 1; j--) {
+                for (j = right - 2; array[j] > array[right - 1] && j > left + 1; j--) {
                 }
 
                 if (i >= j) {
@@ -238,30 +237,31 @@ define (function() {
             }
         }
 
-        timeEnd = new Date().getTime();
-        result['timeSort'] = timeEnd - timeStart;
-
         return result;
     };
 
     var quick3 = function(array) {
-        var result1 = _quick3(array, 0, array.length - 1);
+        timeStart = new Date().getTime();
+
+        result = _quick3(array, 0, array.length - 1);
         insertion(array);
 
-        return result1;
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
+
+        return result;
     }
 
     // quick sort 4th: choose the leftest & the rightest & the middle elements as benchmark
     var _quick4 = function(array, left, right) {
-        var i = 0, j = 0, mid = 0, timeStart, timeEnd;
-        timeStart = new Date().getTime();
-        var diff = right - left;
+        var i = 0, j = 0, mid = 0, diff;
+        diff = right - left;
 
         while (diff >= 9) {
-            mid = parseInt(Math.floor(Math.random() * length) % diff);
+            mid = parseInt((Math.random() * array.length) % diff);
             if (mid < 1 || mid > diff - 2) {
                mid = 1;
-            } 
+            }
             mid = left + mid;
 
             if (array[left] > array[mid]) {
@@ -276,9 +276,9 @@ define (function() {
             _swap(array, mid, right - 1, 1);
 
             while (true) {
-                for (i = left + 1; array[i] < array[j] && i < right - 1; i++) {
+                for (i = left + 1; array[i] < array[right - 1] && i < right - 1; i++) {
                 }
-                for (j = right - 2; array[j] > array[j] && j > 1; j--) {
+                for (j = right - 2; array[j] > array[right - 1] && j > left + 1; j--) {
                 }
 
                 if (i >= j) {
@@ -299,17 +299,19 @@ define (function() {
             }
         }
 
-        timeEnd = new Date().getTime();
-        result['timeSort'] = timeEnd - timeStart;
-
         return result;
     };
 
     var quick4 = function(array) {
-        var result1 = _quick4(array, 0, array.length - 1);
+        timeStart = new Date().getTime();
+
+        result = _quick4(array, 0, array.length - 1);
         insertion(array);
 
-        return result1;
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
+
+        return result;
     }
 
     return {
