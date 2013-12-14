@@ -8,7 +8,7 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
     var init = function() {
         // bind event handler to sorting buttons 
         util.addEventHandler(document.getElementById("btnBubble"), 'click', ready, sorting.bubble);
-        util.addEventHandler(document.getElementById("btnInsert"), 'click', ready, sorting.insert);
+        util.addEventHandler(document.getElementById("btnInsertion"), 'click', ready, sorting.insertion);
         util.addEventHandler(document.getElementById("btnShell"), 'click', ready, sorting.shell);
         util.addEventHandler(document.getElementById("btnQuick1"), 'click', ready, sorting.quick1);
         util.addEventHandler(document.getElementById("btnQuick2"), 'click', ready, sorting.quick2);
