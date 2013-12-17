@@ -46,6 +46,31 @@ define (function() {
         return result;
     };
 
+    var selection = function(array) {
+        var i, j, min, len = array.length;
+        timeStart = new Date().getTime();
+
+        for (i = 0; i < len; i++){
+            min = i;
+
+            for (j = i + 1; j < len; j++){
+                if (array[j] < array[min]){
+                    min = j;
+                }
+            }
+
+            if (i != min){
+                _swap(array, i, min, 1);
+            }
+        }
+
+        timeEnd = new Date().getTime();
+        result['timeSorting'] = timeEnd - timeStart;
+        console.log(array);
+
+        return result;
+    }
+
     // insertion sort
     var insertion = function(array) {
         var i, j, temp;
@@ -314,13 +339,55 @@ define (function() {
         return result;
     }
 
+    function partition(myArray, left, right) {
+        var pivot   = myArray[Math.floor((right + left) / 2)],
+            i       = left,
+            j       = right;
+
+        while (i <= j) {
+            while (myArray[i] < pivot) {
+                i++;
+            }
+            while (myArray[j] > pivot) {
+                j--;
+            }
+
+            if (i <= j) {
+                _swap(myArray, i, j);
+                i++;
+                j--;
+            }
+        }
+
+        return i;
+    };
+
+    function quickSort(myArray, left, right) {
+        if (myArray.length < 2) return myArray;
+
+        left = (typeof left !== "number" ? 0 : left);
+        right = (typeof right !== "number" ? myArray.length - 1 : right);
+        var index  = partition(myArray, left, right);
+
+         if (left < index - 1) {
+            quickSort(myArray, left, index - 1);
+         }
+         if (index < right) {
+            quickSort(myArray, index, right);
+          }
+
+         return result;
+    };
+
     return {
         bubble: bubble,
+        selection: selection,
         insertion: insertion,
         shell: shell,
         quick1: quick1,
         quick2: quick2,
         quick3: quick3,
-        quick4: quick4
+        quick4: quick4,
+        quickSort: quickSort
     };
 });
