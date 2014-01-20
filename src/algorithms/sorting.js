@@ -12,7 +12,7 @@ define (function() {
         result['swaps'].push([x, y]);
 
         if (flagLog !== undefined && flagLog === 1) {
-            console.log(array);
+            //console.log(array);
         }
 
         return;
@@ -41,7 +41,7 @@ define (function() {
 
         timeEnd = new Date().getTime();
         result['timeSorting'] = timeEnd - timeStart;
-        console.log(array);
+        //console.log(array);
 
         return result;
     };
@@ -66,7 +66,7 @@ define (function() {
 
         timeEnd = new Date().getTime();
         result['timeSorting'] = timeEnd - timeStart;
-        console.log(array);
+        //console.log(array);
 
         return result;
     }
@@ -92,7 +92,7 @@ define (function() {
 
         timeEnd = new Date().getTime();
         result['timeSorting'] = timeEnd - timeStart;
-        console.log(array);
+        //console.log(array);
 
         return result;
     };
@@ -124,7 +124,7 @@ define (function() {
 
         timeEnd = new Date().getTime();
         result['timeSorting'] = timeEnd - timeStart;
-        console.log(array);
+        // console.log(array);
 
         return result;
     };
@@ -157,6 +157,7 @@ define (function() {
     };
 
     var quick1 = function(array) {
+        result['swaps'] = [];
         timeStart = new Date().getTime();
 
         result = _quick1(array, 0, array.length - 1);
@@ -279,7 +280,7 @@ define (function() {
 
     // quick sort 4th: choose the leftest & the rightest & the middle elements as benchmark
     var _quick4 = function(array, left, right) {
-        var i = 0, j = 0, mid = 0, diff;
+        /*var i = 0, j = 0, mid = 0, diff;
         diff = right - left;
 
         while (diff >= 9) {
@@ -323,7 +324,7 @@ define (function() {
                 left = i + 1;
             }
         }
-
+*/
         return result;
     };
 

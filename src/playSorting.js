@@ -50,26 +50,32 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
             }
 
             speed = document.getElementById("speed").value;
+            swapHistory = [];
+            swapHistory['swaps'] = [];
             swapHistory = sortMethod(data);
             swaps = swapHistory['swaps'].length;
             timeSorting = swapHistory['timeSorting'];
 
-            timePlayStart = new Date().getTime();
-            go();
+            // play animation of not
+            if (document.getElementById("flagPlay").checked === true) {
+                timePlayStart = new Date().getTime();
+                go();
+            }
+
+            writeStatistics();
         }
     };
 
     var go = function() {
         flagPlaying = 1;
-        // console.time('replay time-consuming');
+        //console.time('replay time-consuming');
 
         if (swapHistory['swaps'].length > 0) {
             var current = swapHistory['swaps'].shift();
-            swap(current, blocks)
+            swap(current, blocks);
         } else {
             timePlayEnd = new Date().getTime();
-            // console.timeEnd('replay time-consuming');
-            _writeStatistics();
+            //console.timeEnd('replay time-consuming');
 
             flagPlaying = 0;
             flagPlayed = 1;
@@ -90,14 +96,19 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
 
     var start = function() {
         if (flagPlaying == 0 || flagPlayed == 1) {
+            document.getElementById("statistics").innerHTML= "";
             flagPlayed = 0;
             n = document.getElementById("arrayLength").value;
             var direction = getDirection();
             blocks = [];
             data = util.generateArray(n, direction);
-            initGraph(data, n, blocks);
 
-            document.getElementById("statistics").innerHTML= "";
+            // play animation of not
+            if (document.getElementById("flagPlay").checked === true) {
+                initGraph(data, n, blocks);
+            } else {
+                initGraph([], 0, []);
+            }
         }
     };
 
@@ -111,13 +122,17 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
         blocks[j].style.height = t;
     };
 
-    var _writeStatistics = function() {
+    var writeStatistics = function() {
         var html = '';
 
         html = 'swaps: ' + swaps + ' times, ';
-        html += 'sorting time: ' + timeSorting + ' ms, '
-        html += 'play time: ' + (timePlayEnd - timePlayStart) + ' ms';
-        document.getElementById("statistics").innerHTML= html;
+        html += 'sorting time: ' + timeSorting + ' ms, ';
+
+        if (document.getElementById("flagPlay").checked === true) {
+            html += 'play time: ' + (timePlayEnd - timePlayStart) + ' ms';
+        }
+
+        document.getElementById("statistics").innerHTML = html;
     };
 
     // change blocks color
