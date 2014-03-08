@@ -4,11 +4,17 @@ define (function() {
     result['swaps'] = [];
 
     var _swap = function(array, x, y, flagLog) {
-        var temp;
+        //var temp;
 
-        temp = array[x];
-        array[x] = array[y];
-        array[y] = temp;
+        // temp = array[x];
+        // array[x] = array[y];
+        // array[y] = temp;
+
+        // 三次异或交换值
+        array[x] ^= array[y];
+        array[y] ^= array[x];
+        array[x] ^= array[y];
+
         result['swaps'].push([x, y]);
 
         if (flagLog !== undefined && flagLog === 1) {
