@@ -12,10 +12,10 @@ define(['util', 'algorithms/sorting'], function(util, sorting){
         util.addEventHandler(document.getElementById("btnInsertion"), 'click', ready, sorting.insertion);
         util.addEventHandler(document.getElementById("btnShell"), 'click', ready, sorting.shell);
         util.addEventHandler(document.getElementById("btnQuick1"), 'click', ready, sorting.quick1);
-        util.addEventHandler(document.getElementById("btnQuick2"), 'click', ready, sorting.quick2);
-        util.addEventHandler(document.getElementById("btnQuick3"), 'click', ready, sorting.quick3);
+        //util.addEventHandler(document.getElementById("btnQuick2"), 'click', ready, sorting.quick2);
+        //util.addEventHandler(document.getElementById("btnQuick3"), 'click', ready, sorting.quick3);
         //util.addEventHandler(document.getElementById("btnQuick4"), 'click', ready, sorting.quick4);
-        util.addEventHandler(document.getElementById("btnQuickSort"), 'click', ready, sorting.quickSort);
+        //util.addEventHandler(document.getElementById("btnQuickSort"), 'click', ready, sorting.quickSort);
 
         // bind event handler to control buttons 
         document.getElementById("btnReset").onclick = reset;
